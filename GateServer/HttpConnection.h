@@ -16,6 +16,8 @@ private:
 	void WriteResponse();
 	void HandleRequest();
 
+	void PreParseGetParam();
+
 private:
 	tcp::socket _socket;
 	beast::flat_buffer _buffer{ 8192 };
@@ -24,5 +26,9 @@ private:
 	net::steady_timer _deadline{
 		_socket.get_executor(), std::chrono::seconds(60)
 	};
+
+	// get参数解析需要的成员变量
+	std::string _get_url;
+	std::unordered_map<std::string, std::string> _get_params;
 };
 
