@@ -1,3 +1,11 @@
 QDialog#LoginDialog{
 background-color:rgb(255,255,255)
 }
+
+#error_tip_label[state = 'normal'] {
+    color:green;
+}
+
+#error_tip_label[state = 'error'] {
+    color:red;
+}

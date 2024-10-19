@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QWidget>
 
 void MainWindow::slotSwitchToReg()
 {
@@ -11,28 +12,22 @@ void MainWindow::slotSwitchToReg()
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
-    , _login_dlg(new LoginDialog())
-    , _register_dlg(new RegisterDialog())
+    , _login_dlg(new LoginDialog(this))
+    , _register_dlg(new RegisterDialog(this))
 {
     ui->setupUi(this);
     setCentralWidget(_login_dlg);
-    _login_dlg->show();
 
     // 信号槽创建
     connect(_login_dlg, &LoginDialog::switchRegister, this, &MainWindow::slotSwitchToReg);
 
+    _login_dlg->setWindowFlags(Qt::CustomizeWindowHint | Qt::FramelessWindowHint);
+    _register_dlg->setWindowFlags(Qt::CustomizeWindowHint | Qt::FramelessWindowHint);
+    _register_dlg->hide();
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
-    if (_login_dlg) {
-        delete  _login_dlg;
-        _login_dlg = nullptr;
-    }
-    if (_register_dlg) {
-        delete _register_dlg;
-        _register_dlg = nullptr;
-    }
 }
 
