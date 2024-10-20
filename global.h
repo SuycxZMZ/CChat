@@ -14,8 +14,11 @@
 #include <QByteArray>
 #include <QNetworkReply>
 #include <QMap>
-#include <functional>
+#include <QJsonObject>
+#include <QDir>
 #include <QRegularExpression>
+#include <QSettings>
+#include <functional>
 #include <memory>
 #include <iostream>
 #include <mutex>
@@ -38,5 +41,7 @@ enum ErrorCodes {
 enum Modules {
     REGISTERMOD = 0,
 };
+
+extern QString gate_url_prefix;
 
 #endif // GLOBAL_H

@@ -24,12 +24,12 @@ class HttpMgr : public QObject,
                 public std::enable_shared_from_this<HttpMgr> {
     Q_OBJECT
 public:
-    ~HttpMgr();
-private:
     friend class Singlton<HttpMgr>;
-    HttpMgr();
+    ~HttpMgr();
     void PostHttpReq(QUrl url, QJsonObject ison, ReqId req_id, Modules mod);
+private:
 
+    HttpMgr();
 private:
     QNetworkAccessManager _manager;
 private slots:
