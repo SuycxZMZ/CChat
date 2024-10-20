@@ -1,10 +1,16 @@
 ﻿#include "const.h"
 #include "CServer.h"
+#include "ConfigMgr.h"
 
 int main()
 {
+    // ---------------- 加载配置文件 ---------------- //
+    ConfigMgr gate_all_config_mgr;
+    std::string gate_port_str = gate_all_config_mgr["GateServer"]["port"];
+    unsigned short gate_port = std::stoi(gate_port_str);
+
     try {
-        unsigned short port = static_cast<unsigned short>(8080);
+        unsigned short port = gate_port;
         net::io_context ioc{ 1 };
         boost::asio::signal_set signals(ioc, SIGINT, SIGTERM);
         signals.async_wait([&ioc](const boost::system::error_code& error, int signal_number) {
