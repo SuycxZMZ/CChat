@@ -41,3 +41,4 @@ GateServer/x64
 VarifyServer/node_modules
 VarifyServer/package-lock.json
 VarifyServer/package.json
+VarifyServer/config.json
