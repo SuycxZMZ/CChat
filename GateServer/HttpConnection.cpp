@@ -27,6 +27,10 @@ void HttpConnection::Start() {
 	});
 }
 
+tcp::socket& HttpConnection::GetSocket() {
+	return _socket;
+}
+
 void HttpConnection::CheckDeadline() {
 	auto self = shared_from_this();
 	_deadline.async_wait([self](beast::error_code ec) {

@@ -10,6 +10,7 @@ class HttpConnection : public std::enable_shared_from_this<HttpConnection>
 public:
 	HttpConnection(tcp::socket socket);
 	void Start();
+	tcp::socket& GetSocket();
 
 private:
 	void CheckDeadline();
