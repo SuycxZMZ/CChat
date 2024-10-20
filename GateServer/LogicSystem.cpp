@@ -1,6 +1,7 @@
 #include "LogicSystem.h"
 #include "HttpConnection.h"
 #include "const.h"
+#include "VarifyGrpcClient.h"
 
 LogicSystem::LogicSystem() {
 	RegGet("/get_test", [](std::shared_ptr<HttpConnection> connection) {
@@ -54,8 +55,12 @@ LogicSystem::LogicSystem() {
 
 		auto email = src_root["email"].asString();
 		std::cout << "email is " << email << std::endl;
+
+		// 要给验证码服务器发送grpc请求
+		auto reply = VarifyGrpcClient::GetInstance()->GetVarifyCode(email);
+
 		// 构建成功的响应 JSON
-		root["error"] = 0;
+		root["error"] = reply.error();
 		root["email"] = email;
 		// 将响应 JSON 转换为字符串
 		std::string jsonstr = root.toStyledString();
