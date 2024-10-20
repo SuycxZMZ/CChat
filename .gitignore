@@ -37,3 +37,7 @@ GateServer/.vs
 GateServer/GateServer
 GateServer/packages
 GateServer/x64
+
+VarifyServer/node_modules
+VarifyServer/package-lock.json
+VarifyServer/package.json
