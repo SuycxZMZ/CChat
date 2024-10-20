@@ -1,4 +1,5 @@
 #include "const.h"
+#include "ConfigMgr.h"
 
 unsigned char ToHex(unsigned char x) {
 	return  x > 9 ? x + 55 : x + 48;

@@ -3,6 +3,9 @@
 #include <boost/beast/http.hpp>
 #include <boost/beast.hpp>
 #include <boost/asio.hpp>
+#include <boost/filesystem.hpp>
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/ini_parser.hpp>
 
 #include <json/json.h>
 
@@ -33,3 +36,5 @@ enum ErrorCodes {
     RPCFailed = 1002,  //RPC«Î«Û¥ÌŒÛ
 };
 
+class ConfigMgr;
+extern ConfigMgr gate_all_config_mgr;
