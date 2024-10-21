@@ -15,12 +15,15 @@ struct SectionInfo
 class ConfigMgr
 {
 public:
-	ConfigMgr();
+	static ConfigMgr& GetInstance();
 	~ConfigMgr();
 	SectionInfo operator[](const std::string& section);
 	ConfigMgr& operator=(const ConfigMgr& other);
 	ConfigMgr(const ConfigMgr& other);
 private:
+
+	ConfigMgr();
+
 	std::map<std::string, SectionInfo> _config_map;
 };
 

@@ -5,7 +5,7 @@
 int main()
 {
     // ---------------- 加载配置文件 ---------------- //
-    ConfigMgr gate_all_config_mgr;
+    auto & gate_all_config_mgr = ConfigMgr::GetInstance();
     std::string gate_port_str = gate_all_config_mgr["GateServer"]["port"];
     unsigned short gate_port = std::stoi(gate_port_str);
 

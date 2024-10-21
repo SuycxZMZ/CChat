@@ -35,6 +35,3 @@ enum ErrorCodes {
     Error_Json = 1001,  //Json½âÎö´íÎó
     RPCFailed = 1002,  //RPCÇëÇó´íÎó
 };
-
-class ConfigMgr;
-extern ConfigMgr gate_all_config_mgr;

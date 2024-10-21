@@ -53,6 +53,12 @@ ConfigMgr::ConfigMgr() {
 	}
 }
 
+ConfigMgr& ConfigMgr::GetInstance()
+{
+	static ConfigMgr config_mgr;
+	return config_mgr;
+}
+
 ConfigMgr::~ConfigMgr() {
 	_config_map.clear();
 }
