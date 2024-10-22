@@ -15,7 +15,12 @@
 #include <string>
 #include <map>
 #include <unordered_map>
+#include <queue>
 #include <cassert>
+#include <condition_variable>
+#include <mutex>
+
+#include <hiredis.h>
 
 namespace beast = boost::beast;
 namespace http = beast::http;
