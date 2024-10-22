@@ -6,6 +6,7 @@ SectionInfo& SectionInfo::operator=(const SectionInfo& other) {
 		return *this;
 	}
 	this->_section_datas = other._section_datas;
+	return *this;
 }
 
 std::string SectionInfo::operator[](const std::string& key) {
