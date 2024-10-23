@@ -59,3 +59,12 @@ std::string UrlDecode(const std::string& str) {
     }
     return strTemp;
 }
+
+Defer::Defer(std::function<void()> func) : _func(func)
+{
+}
+
+Defer::~Defer()
+{
+    _func();
+}
