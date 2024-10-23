@@ -6,7 +6,7 @@
 int main()
 {
     //TestRedis();
-    TestRedisMgr();
+    //TestRedisMgr();
     // ---------------- 加载配置文件 ---------------- //
     auto & gate_all_config_mgr = ConfigMgr::GetInstance();
     std::string gate_port_str = gate_all_config_mgr["GateServer"]["port"];
