@@ -29,7 +29,7 @@ void HttpMgr::PostHttpReq(QUrl url, QJsonObject json, ReqId req_id, Modules mod)
             reply->deleteLater();
             return;
         }
-
+        qDebug() << "QNetworkReply::finished" << endl;
         // 没出现错误
         QString res = reply->readAll();
         // 发送信号通知
