@@ -24,7 +24,7 @@ class MainWindow : public QMainWindow
 
 public slots:
     void slotSwitchToReg();
-
+    void SlotSwitchLogin();
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
