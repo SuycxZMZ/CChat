@@ -18,6 +18,8 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
+class ResetDialog;
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -25,6 +27,8 @@ class MainWindow : public QMainWindow
 public slots:
     void slotSwitchToReg();
     void SlotSwitchLogin();
+    void SlotSwitchLogin2(); // 重置密码界面返回登陆界面的槽
+    void SlotSwitchReset();
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
@@ -33,5 +37,6 @@ private:
     Ui::MainWindow *ui;
     LoginDialog * _login_dlg;
     RegisterDialog * _register_dlg;
+    ResetDialog* _reset_dlg;
 };
 #endif // MAINWINDOW_H
