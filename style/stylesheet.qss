@@ -10,6 +10,14 @@ background-color:rgb(255,255,255)
     color:red;
 }
 
+#err_tip[state='normal']{
+   color: green;
+}
+
+#err_tip[state='err']{
+   color: red;
+}
+
 #passVisible_label[state='unvisible']{
    border-image: url(:/res/unvisible.png);
 }

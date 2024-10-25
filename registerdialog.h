@@ -26,6 +26,8 @@ private slots:
 
     void on_return_Btn_clicked();
 
+    void on_cancel_Btn_clicked();
+
 private:
     void initHttpHandlers();
 

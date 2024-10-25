@@ -329,3 +329,9 @@ void RegisterDialog::on_return_Btn_clicked()
     _countdown_timer->stop();
     emit sigSwitchLogin();
 }
+
+void RegisterDialog::on_cancel_Btn_clicked()
+{
+    _countdown_timer->stop();
+    emit sigSwitchLogin();
+}
