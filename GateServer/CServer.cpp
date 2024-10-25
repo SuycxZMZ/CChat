@@ -1,4 +1,4 @@
-#include "CServer.h"
+ï»¿#include "CServer.h"
 #include "HttpConnection.h"
 #include "AsioIOServicePool.h"
 #include <iostream>
@@ -19,15 +19,15 @@ void CServer::Start() {
 	_acceptor.async_accept(new_connection->GetSocket(), [self, new_connection](beast::error_code ec) {
 		try {
 			if (ec) {
-				// Ò»¸öÁ¬½ÓÊ§°Ü£¬¼ÌÐø¼àÌýÆäËûÁ¬½Ó
+				// ä¸€ä¸ªè¿žæŽ¥å¤±è´¥ï¼Œç»§ç»­ç›‘å¬å…¶ä»–è¿žæŽ¥
 				self->Start();
 				return;
 			}
 
-			// Á¬½Ó½¨Á¢Ö®ºó¾ÍÒª¿ªÊ¼½ÓÊÕÁË
+			// è¿žæŽ¥å»ºç«‹ä¹‹åŽå°±è¦å¼€å§‹æŽ¥æ”¶äº†
 			new_connection->Start();
 
-			// ¼ÌÐø¼àÌý
+			// ç»§ç»­ç›‘å¬
 			self->Start();
 		}
 		catch (std::exception& exp) {

@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "Singleton.h"
 #include <boost/asio.hpp>
@@ -19,7 +19,7 @@ public:
 	void Stop();
 
 private:
-	// Ã»ÓĞÓÃ hardware_concurrency ÒòÎª·Åµ½±¾»úÀ´ÅÜ£¬Ã»ÄÇÃ´¶àÏß³Ì
+	// æ²¡æœ‰ç”¨ hardware_concurrency å› ä¸ºæ”¾åˆ°æœ¬æœºæ¥è·‘ï¼Œæ²¡é‚£ä¹ˆå¤šçº¿ç¨‹
 	AsioIOServicePool(std::size_t size = 2);
 private:
 	std::vector<IOService> _ioServices;

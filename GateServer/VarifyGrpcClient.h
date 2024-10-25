@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include <grpcpp/grpcpp.h>
 #include <atomic>
@@ -20,7 +20,7 @@ public:
 	~RPCConnectionPool();
 	std::unique_ptr<VarifyService::Stub> GetConnection();
 
-	// »ØÊÕÒ»¸öÁ¬½Óµ½poolÀï
+	// å›æ”¶ä¸€ä¸ªè¿æ¥åˆ°poolé‡Œ
 	void ReturnConnection(std::unique_ptr<VarifyService::Stub> context);
 	void Close();
 

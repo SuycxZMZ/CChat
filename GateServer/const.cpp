@@ -1,4 +1,4 @@
-#include "const.h"
+ï»¿#include "const.h"
 #include "ConfigMgr.h"
 
 unsigned char ToHex(unsigned char x) {
@@ -19,18 +19,18 @@ std::string UrlEncode(const std::string& str) {
     size_t length = str.length();
     for (size_t i = 0; i < length; i++)
     {
-        //ÅÐ¶ÏÊÇ·ñ½öÓÐÊý×ÖºÍ×ÖÄ¸¹¹³É
+        //åˆ¤æ–­æ˜¯å¦ä»…æœ‰æ•°å­—å’Œå­—æ¯æž„æˆ
         if (isalnum((unsigned char)str[i]) ||
                 (str[i] == '-') ||
                 (str[i] == '_') ||
                 (str[i] == '.') ||
                 (str[i] == '~'))
             strTemp += str[i];
-        else if (str[i] == ' ') //Îª¿Õ×Ö·û
+        else if (str[i] == ' ') //ä¸ºç©ºå­—ç¬¦
             strTemp += "+";
-        else // ºº×Ö
+        else // æ±‰å­—
         {
-            //ÆäËû×Ö·ûÐèÒªÌáÇ°¼Ó%²¢ÇÒ¸ßËÄÎ»ºÍµÍËÄÎ»·Ö±ð×ªÎª16½øÖÆ
+            //å…¶ä»–å­—ç¬¦éœ€è¦æå‰åŠ %å¹¶ä¸”é«˜å››ä½å’Œä½Žå››ä½åˆ†åˆ«è½¬ä¸º16è¿›åˆ¶
             strTemp += '%';
             strTemp += ToHex((unsigned char)str[i] >> 4);
             strTemp += ToHex((unsigned char)str[i] & 0x0F);
@@ -44,10 +44,10 @@ std::string UrlDecode(const std::string& str) {
     size_t length = str.length();
     for (size_t i = 0; i < length; i++)
     {
-        //»¹Ô­+Îª¿Õ
+        //è¿˜åŽŸ+ä¸ºç©º
         if (str[i] == '+') strTemp += ' ';
 
-        //Óöµ½%½«ºóÃæµÄÁ½¸ö×Ö·û´Ó16½øÖÆ×ªÎªcharÔÙÆ´½Ó
+        //é‡åˆ°%å°†åŽé¢çš„ä¸¤ä¸ªå­—ç¬¦ä»Ž16è¿›åˆ¶è½¬ä¸ºcharå†æ‹¼æŽ¥
         else if (str[i] == '%')
         {
             assert(i + 2 < length);
@@ -68,3 +68,4 @@ Defer::~Defer()
 {
     _func();
 }
+

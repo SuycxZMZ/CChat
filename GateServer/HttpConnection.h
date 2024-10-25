@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include "const.h"
 
@@ -28,7 +28,7 @@ private:
 		_socket.get_executor(), std::chrono::seconds(60)
 	};
 
-	// get²ÎÊı½âÎöĞèÒªµÄ³ÉÔ±±äÁ¿
+	// getå‚æ•°è§£æéœ€è¦çš„æˆå‘˜å˜é‡
 	std::string _get_url;
 	std::unordered_map<std::string, std::string> _get_params;
 };

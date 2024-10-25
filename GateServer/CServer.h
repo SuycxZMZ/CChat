@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "const.h"
 
@@ -12,4 +12,5 @@ private:
 	net::io_context& _ioc;
 	//tcp::socket _socket;
 };
+
 

@@ -1,4 +1,4 @@
-#include "RedisMgr.h"
+ï»¿#include "RedisMgr.h"
 #include "ConfigMgr.h"
 
 RedisMgr::RedisMgr() {
@@ -47,7 +47,7 @@ bool RedisMgr::Set(const std::string& key, const std::string& value)
     }
 
     auto reply = (redisReply*)redisCommand(connect, "SET %s %s", key.c_str(), value.c_str());
-    //Èç¹û·µ»ØNULLÔòËµÃ÷Ö´ÐÐÊ§°Ü
+    //å¦‚æžœè¿”å›žNULLåˆ™è¯´æ˜Žæ‰§è¡Œå¤±è´¥
     if (NULL == reply)
     {
         std::cout << "Execut command [ SET " << key << "  " << value << " ] failure ! " << std::endl;
@@ -79,13 +79,13 @@ bool RedisMgr::Auth(const std::string& passwd)
 
     auto reply = (redisReply*)redisCommand(connect, "AUTH %s", passwd.c_str());
     if (reply->type == REDIS_REPLY_ERROR) {
-        std::cout << "ÈÏÖ¤Ê§°Ü" << std::endl;
+        std::cout << "è®¤è¯å¤±è´¥" << std::endl;
         freeReplyObject(reply);
         return false;
     }
     else {
         freeReplyObject(reply);
-        std::cout << "ÈÏÖ¤³É¹¦" << std::endl;
+        std::cout << "è®¤è¯æˆåŠŸ" << std::endl;
         return true;
     }
 }
@@ -327,13 +327,13 @@ RedisConnectionPool::RedisConnectionPool(std::size_t pool_size, const char* host
 
         auto reply = (redisReply*)redisCommand(context, "AUTH %s", pwd);
         if (reply->type == REDIS_REPLY_ERROR) {
-            std::cout << "ÈÏÖ¤Ê§°Ü" << std::endl;
+            std::cout << "è®¤è¯å¤±è´¥" << std::endl;
             freeReplyObject(reply);
             continue;
         }
 
         freeReplyObject(reply);
-        std::cout << "ÈÏÖ¤³É¹¦" << std::endl;
+        std::cout << "è®¤è¯æˆåŠŸ" << std::endl;
         _connections.push(context);
     }
 }
