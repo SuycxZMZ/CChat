@@ -60,3 +60,5 @@ public:
 private:
 	std::function<void()> _func;
 };
+
+
