@@ -42,3 +42,13 @@ VarifyServer/node_modules
 VarifyServer/package-lock.json
 VarifyServer/package.json
 VarifyServer/config.json
+
+StatusServer/.vs
+StatusServer/packages
+StatusServer/StatusServer
+StatusServer/x64
+
+ChatServer/.vs
+ChatServer/packages
+ChatServer/ChatServer
+ChatServer/x64
