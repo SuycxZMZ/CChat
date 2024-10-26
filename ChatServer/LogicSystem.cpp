@@ -2,6 +2,8 @@
 #include "CSession.h"
 #include "const.h"
 #include "RedisMgr.h"
+#include "MySqlMgr.h"
+#include "StatusGrpcClient.h"
 #include <functional>
 #include <iostream>
 #include <json/reader.h>
@@ -106,57 +108,42 @@ void LogicSystem::LoginHandler(std::shared_ptr<CSession> session, const short& m
         std::cerr << "JSON 解析失败: " << errs << std::endl;
         return;
     }
-    
-    std::cout << "user login uid is " << root["uid"].asInt()
-        << " user token is " << root["token"].asString() << std::endl;
-    std::string return_str = root.toStyledString();
-    session->Send(return_str, msg_id);
-    
-    //auto uid = root["uid"].asInt();
-    //auto token = root["token"].asString();
-    //std::cout << "user login uid is:" << uid << " user token is:"
-    //    << token << std::endl;
+    auto uid = root["uid"].asInt();
+    std::cout << "user login uid is  " << uid << " user token  is "
+        << root["token"].asString() << std::endl;
 
-    //Json::Value rtvalue;
-    //Defer defer([this, &rtvalue, session]() {
-    //    std::string return_str = rtvalue.toStyledString();
-    //    session->Send(return_str, MSG_CHAT_LOGIN_RSP);
-    //});
+    //从状态服务器获取token匹配是否准确
+    auto rsp = StatusGrpcClient::GetInstance()->Login(uid, root["token"].asString());
+    Json::Value  rtvalue;
+    Defer defer([this, &rtvalue, session]() {
+        std::string return_str = rtvalue.toStyledString();
+        session->Send(return_str, MSG_CHAT_LOGIN_RSP);
+    });
 
-    //// 去redis中拿token
-    //std::string uid_str = std::to_string(uid);
-    //std::string token_key = USERTOKENPREFIX + uid_str;
-    //std::string token_value = "";
-    //bool success = RedisMgr::GetInstance()->Get(token_key, token_value);
-    //if (!success) {
-    //    rtvalue["error"] = ErrorCodes::UidInvalid;
-    //    return;
-    //}
-    //if (token_value != token) {
-    //    rtvalue["error"] = ErrorCodes::TokenInvalid;
-    //    return;
-    //}
+    rtvalue["error"] = rsp.error();
+    if (rsp.error() != ErrorCodes::Success) {
+        return;
+    }
 
-    //rtvalue["error"] = ErrorCodes::Success;
-    //std::string base_key = USER_BASE_INFO + uid_str;
-    //auto user_info = std::make_shared<UserInfo>();
-    //bool b_base = GetBaseInfo(base_key, uid, user_info);
-    //if (!b_base) {
-    //    rtvalue["error"] = ErrorCodes::UidInvalid;
-    //    return;
-    //}
+    //内存中查询用户信息
+    auto find_iter = _users.find(uid);
+    std::shared_ptr<UserInfo> user_info = nullptr;
+    if (find_iter == _users.end()) {
+        //查询数据库
+        user_info = MySqlMgr::GetInstance()->GetUser(uid);
+        if (user_info == nullptr) {
+            rtvalue["error"] = ErrorCodes::UidInvalid;
+            return;
+        }
 
-    //rtvalue["uid"] = uid;
-    //rtvalue["pwd"] = user_info->pwd;
-    //rtvalue["name"] = user_info->name;
-    //rtvalue["email"] = user_info->email;
-    //rtvalue["nick"] = user_info->nick;
-    //rtvalue["desc"] = user_info->desc;
-    //rtvalue["sex"] = user_info->sex;
-    //rtvalue["icon"] = user_info->icon;
+        _users[uid] = user_info;
+    }
+    else {
+        user_info = find_iter->second;
+    }
 
-    //std::vector<std::shared_ptr<ApplyInfo>> apply_list;
-    //auto b_apply = GetFriendApplyInfo(uid, apply_list);
-
+    rtvalue["uid"] = uid;
+    rtvalue["token"] = rsp.token();
+    rtvalue["name"] = user_info->name;
 }
 

@@ -1,4 +1,4 @@
-#ifndef MSGNODE_H
+﻿#ifndef MSGNODE_H
 #define MSGNODE_H
 #include <cstring>
 #include <iostream>

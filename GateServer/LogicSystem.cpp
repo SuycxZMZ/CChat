@@ -263,6 +263,7 @@ LogicSystem::LogicSystem() {
 		auto email = src_root["email"].asString();
 		auto pwd = src_root["passwd"].asString();
 		UserInfo userInfo;
+		// 查mysql看能否登陆
 		bool pwd_valid = MySqlMgr::GetInstance()->CheckPwd(email, pwd, userInfo);
 		if (!pwd_valid) {
 			std::cout << " user pwd not match" << std::endl;
@@ -272,6 +273,7 @@ LogicSystem::LogicSystem() {
 			return true;
 		}
 
+		// 查状态服务器，请求分一个聊天服务器，也就是路由一下
 		auto reply = StatusGrpcClient::GetInstance()->GetChatServer(userInfo.uid);
 		if (reply.error()) {
 			std::cout << " grpc get chat server failed, error is " << reply.error() << std::endl;
@@ -281,6 +283,7 @@ LogicSystem::LogicSystem() {
 			return true;
 		}
 
+		// 写回发，给客户端，客户端根据回发信息与真正的聊天服务器建立长连接
 		std::cout << "succeed to load userinfo uid is " << userInfo.uid << std::endl;
 		root["error"] = 0;
 		root["email"] = email;

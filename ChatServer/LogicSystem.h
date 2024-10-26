@@ -9,6 +9,9 @@
 #include <queue>
 #include <string>
 #include <thread>
+#include <unordered_map>
+#include "const.h"
+#include "const.h"
 
 class CSession;
 class LogicNode;
@@ -44,6 +47,7 @@ private:
     std::condition_variable _consume;
     bool _b_stop;
     std::map<short, FuncCallBack> _func_callbacks;
+    std::unordered_map<int, std::shared_ptr<UserInfo>> _users;
 };
 
 #endif

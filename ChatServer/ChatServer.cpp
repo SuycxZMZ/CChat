@@ -24,6 +24,8 @@ int main()
 			pool.Stop();
 		});
 		auto port_str = config_mgr["SelfServer"]["port"];
+		std::cout << "---------------- ChatServer start at : "
+			<< port_str << " ----------------" << std::endl;
 		CServer s(io_context, atoi(port_str.c_str()));
 		io_context.run();
 	}

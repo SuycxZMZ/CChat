@@ -42,6 +42,7 @@ void HttpConnection::CheckDeadline() {
 
 // 简单短链接
 void HttpConnection::WriteResponse() {
+	std::cout << "HttpConnection::WriteResponse()" << std::endl;
 	auto self = shared_from_this();
 	_response.content_length(_response.body().size());
 	http::async_write(_socket, _response, [self](beast::error_code ec, std::size_t) {

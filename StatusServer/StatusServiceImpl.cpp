@@ -1,4 +1,4 @@
-#include "StatusServiceImpl.h"
+﻿#include "StatusServiceImpl.h"
 #include "ConfigMgr.h"
 #include "RedisMgr.h"
 #include <iostream>
@@ -15,6 +15,7 @@ std::string generate_unique_string() {
 	return unique_string;
 }
 
+// 读取配置文件中的ChatServer信息，初始化ChatServer表
 StatusServiceImpl::StatusServiceImpl()
 {
 	auto& config_mgr = ConfigMgr::GetInstance();
@@ -41,7 +42,7 @@ StatusServiceImpl::StatusServiceImpl()
 
 ::grpc::Status StatusServiceImpl::GetChatServer(::grpc::ServerContext* context, const message::GetChatServerReq* request, message::GetChatServerRsp* reply)
 {
-	std::string prefix("CChat StatusServer has received :  ");
+	std::cout << " ---------------- searching a suitable server ----------------" << std::endl;
 	const auto& server = GetChatServer();
 	reply->set_host(server.host);
 	reply->set_port(server.port);

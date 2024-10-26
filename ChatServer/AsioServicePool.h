@@ -1,4 +1,4 @@
-#ifndef ASIOSERVICEPOOL_H
+﻿#ifndef ASIOSERVICEPOOL_H
 #define ASIOSERVICEPOOL_H
 
 #include <boost/asio/io_context.hpp>

@@ -1,10 +1,11 @@
-#pragma once
+﻿#pragma once
 
 #include <grpcpp/grpcpp.h>
 #include "message.grpc.pb.h"
 #include "message.pb.h"
 #include <mutex>
 
+// StatusServer路由到的具体聊天服务器，返回给客户端
 class  ChatServer {
 public:
 	ChatServer() :host(""), port(""), name(""), con_count(0) {}
@@ -43,4 +44,4 @@ private:
 	std::mutex _mtx;
 };
 
-std::string generate_unique_string();
+extern std::string generate_unique_string();

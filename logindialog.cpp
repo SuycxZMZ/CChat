@@ -72,7 +72,7 @@ void LoginDialog::initHead()
 
 void LoginDialog::initHttpHandlers()
 {
-    //注册获取登录回包逻辑
+    // 注册获取登录回包逻辑
     _handlers.insert(ReqId::ID_LOGIN_USER, [this](QJsonObject jsonObj) {
         int error = jsonObj["error"].toInt();
         if(error != ErrorCodes::SUCCESS){
@@ -217,6 +217,7 @@ void LoginDialog::slot_login_mod_finish(ReqId id, QString res, ErrorCodes err)
     }
 
     // 回调对应的方法
+    qDebug() << "---------- LoginDialog::slot_login_mod_finish " << "ReqId:" << id << endl;
     _handlers[id](jsonDoc.object());
     return;
 }

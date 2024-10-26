@@ -21,6 +21,7 @@ void HttpMgr::PostHttpReq(QUrl url, QJsonObject json, ReqId req_id, Modules mod)
     QNetworkReply * reply = _manager.post(request, data);
     QObject::connect(reply, &QNetworkReply::finished, [self, reply, req_id, mod](){
         // 处理错误情况
+        qDebug() << "-------------- posthttp finish ----------------";
         if (reply->error() != QNetworkReply::NoError) {
             qDebug() << reply->errorString();
             // 发送信号通知完成

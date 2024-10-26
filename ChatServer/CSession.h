@@ -1,4 +1,4 @@
-#ifndef CSESSION_H
+﻿#ifndef CSESSION_H
 #define CSESSION_H
 
 #include "MsgNode.h"

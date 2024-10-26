@@ -1,4 +1,4 @@
-#include "MsgNode.h"
+﻿#include "MsgNode.h"
 #include "const.h"
 #include <boost/asio/detail/socket_ops.hpp>
 #include <cstring>
