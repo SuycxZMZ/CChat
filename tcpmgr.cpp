@@ -1,4 +1,5 @@
 #include "tcpmgr.h"
+#include "usermgr.h"
 #include <QDebug>
 #include <QAbstractSocket>
 #include <QJsonDocument>
@@ -128,24 +129,12 @@ void TcpMgr::initHandlers()
             return;
         }
 
-        auto uid = jsonObj["uid"].toInt();
-        auto name = jsonObj["name"].toString();
-        auto nick = jsonObj["nick"].toString();
-        auto icon = jsonObj["icon"].toString();
-        auto sex = jsonObj["sex"].toInt();
-
-//        auto user_info = std::make_shared<UserInfo>(uid, name, nick, icon, sex);
-//        UserMgr::GetInstance()->SetUserInfo(user_info);
-//        UserMgr::GetInstance()->SetToken(jsonObj["token"].toString());
-//        if(jsonObj.contains("apply_list")){
-//            UserMgr::GetInstance()->AppendApplyList(jsonObj["apply_list"].toArray());
-//        }
-
-//        //添加好友列表
-//        if (jsonObj.contains("friend_list")) {
-//            UserMgr::GetInstance()->AppendFriendList(jsonObj["friend_list"].toArray());
-//        }
-
+        UserMgr::GetInstance()->SetUid(jsonObj["uid"].toInt());
+        UserMgr::GetInstance()->SetName(jsonObj["name"].toString());
+        UserMgr::GetInstance()->SetToken(jsonObj["token"].toString());
+        qDebug() << "uid:" << UserMgr::GetInstance()->GetUid()
+                 << " name:" << UserMgr::GetInstance()->GetName()
+                 << " token:" << UserMgr::GetInstance()->GetToken();
         emit sig_swich_chatdlg();
     });
 }
