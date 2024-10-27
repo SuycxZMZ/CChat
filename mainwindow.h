@@ -13,6 +13,7 @@
 #include <QMainWindow>
 #include "logindialog.h"
 #include "registerdialog.h"
+#include "chatdialog.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -29,14 +30,16 @@ public slots:
     void SlotSwitchLogin();
     void SlotSwitchLogin2(); // 重置密码界面返回登陆界面的槽
     void SlotSwitchReset();
+    void SlotSwitchChat();
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
 private:
-    Ui::MainWindow *ui;
+    Ui::MainWindow * ui;
     LoginDialog * _login_dlg;
     RegisterDialog * _register_dlg;
-    ResetDialog* _reset_dlg;
+    ResetDialog * _reset_dlg;
+    ChatDialog * _chat_dlg;
 };
 #endif // MAINWINDOW_H

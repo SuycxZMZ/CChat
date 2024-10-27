@@ -135,6 +135,8 @@ void TcpMgr::initHandlers()
         qDebug() << "uid:" << UserMgr::GetInstance()->GetUid()
                  << " name:" << UserMgr::GetInstance()->GetName()
                  << " token:" << UserMgr::GetInstance()->GetToken();
+
+        // 登陆成功信号，触发之后界面会切到聊天界面
         emit sig_swich_chatdlg();
     });
 }
