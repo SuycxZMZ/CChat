@@ -25,9 +25,15 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     HttpMgr.cpp \
     chatdialog.cpp \
+    chatpage.cpp \
+    chatuserlist.cpp \
+    chatuserwid.cpp \
     clickedbtn.cpp \
     clickedlabel.cpp \
+    customizeedit.cpp \
     global.cpp \
+    listitembase.cpp \
+    loadingdlg.cpp \
     logindialog.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -40,9 +46,15 @@ SOURCES += \
 HEADERS += \
     HttpMgr.h \
     chatdialog.h \
+    chatpage.h \
+    chatuserlist.h \
+    chatuserwid.h \
     clickedbtn.h \
     clickedlabel.h \
+    customizeedit.h \
     global.h \
+    listitembase.h \
+    loadingdlg.h \
     logindialog.h \
     mainwindow.h \
     registerdialog.h \
@@ -54,6 +66,9 @@ HEADERS += \
 
 FORMS += \
     chatdialog.ui \
+    chatpage.ui \
+    chatuserwid.ui \
+    loadingdlg.ui \
     logindialog.ui \
     mainwindow.ui \
     registerdialog.ui \
