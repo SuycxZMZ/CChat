@@ -31,6 +31,8 @@
 *.out
 *.app
 
+llfcChatClient/Win-build
+
 # GateServer
 
 GateServer/.vs
