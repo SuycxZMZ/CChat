@@ -40,7 +40,8 @@ StatusServiceImpl::StatusServiceImpl()
  	}
 }
 
-::grpc::Status StatusServiceImpl::GetChatServer(::grpc::ServerContext* context, const message::GetChatServerReq* request, message::GetChatServerRsp* reply)
+::grpc::Status StatusServiceImpl::GetChatServer(::grpc::ServerContext* context, 
+	const message::GetChatServerReq* request, message::GetChatServerRsp* reply)
 {
 	std::cout << " ---------------- searching a suitable server ----------------" << std::endl;
 	const auto& server = GetChatServer();
@@ -52,7 +53,8 @@ StatusServiceImpl::StatusServiceImpl()
 	return ::grpc::Status::OK;
 }
 
-::grpc::Status StatusServiceImpl::Login(::grpc::ServerContext* context, const message::LoginReq* request, message::LoginRsp* reply)
+::grpc::Status StatusServiceImpl::Login(::grpc::ServerContext* context, 
+	const message::LoginReq* request, message::LoginRsp* reply)
 {
 	auto uid = request->uid();
 	auto token = request->token();
@@ -88,6 +90,7 @@ ChatServer StatusServiceImpl::GetChatServer()
 	auto min_server = _servers.begin()->second;
 	auto count_str = RedisMgr::GetInstance()->HGet(LOGIN_COUNT, min_server.name);
 	if (count_str.empty()) {
+		//不存在,默认设置为最大
 		min_server.con_count = INT_MAX;
 	}
 	else {

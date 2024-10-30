@@ -47,7 +47,10 @@ message AddFriendReq {
 	int32  applyuid = 1;
 	string name = 2;
 	string desc = 3;
-	int32  touid = 4;
+	string icon = 4;
+	string nick = 5;
+	int32  sex = 6;
+	int32  touid = 7;
 }
 
 message AddFriendRsp {
@@ -116,3 +119,8 @@ service ChatService {
 	rpc NotifyAuthFriend(AuthFriendReq) returns (AuthFriendRsp) {}
 	rpc NotifyTextChatMsg(TextChatMsgReq) returns (TextChatMsgRsp){}
 }
+
+// G:\thirdParty\grpc\visualpro\third_party\protobuf\Debug\protoc.exe  -I="." --grpc_out="." 
+// --plugin=protoc-gen-grpc="G:\thirdParty\grpc\visualpro\Debug\grpc_cpp_plugin.exe" "message.proto"
+
+// G:\thirdParty\grpc\visualpro\third_party\protobuf\Debug\protoc.exe --cpp_out=. "message.proto"

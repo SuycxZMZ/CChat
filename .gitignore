@@ -54,3 +54,8 @@ ChatServer/.vs
 ChatServer/packages
 ChatServer/ChatServer
 ChatServer/x64
+
+ChatServer2/.vs
+ChatServer2/packages
+ChatServer2/ChatServer
+ChatServer2/x64
