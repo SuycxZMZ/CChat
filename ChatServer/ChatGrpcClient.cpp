@@ -66,10 +66,10 @@ ChatGrpcClient::ChatGrpcClient()
 	}
 
 	for (auto& word : words) {
-		if (cfg[word]["Name"].empty()) {
+		if (cfg[word]["name"].empty()) {
 			continue;
 		}
-		_pools[cfg[word]["Name"]] = std::make_unique<ChatConPool>(5, cfg[word]["host"], cfg[word]["port"]);
+		_pools[cfg[word]["name"]] = std::make_unique<ChatConPool>(5, cfg[word]["host"], cfg[word]["port"]);
 	}
 
 }
@@ -81,7 +81,7 @@ AddFriendRsp ChatGrpcClient::NotifyAddFriend(std::string server_ip, const AddFri
 		rsp.set_error(ErrorCodes::Success);
 		rsp.set_applyuid(req.applyuid());
 		rsp.set_touid(req.touid());
-		});
+	});
 
 	auto find_iter = _pools.find(server_ip);
 	if (find_iter == _pools.end()) {
@@ -94,7 +94,7 @@ AddFriendRsp ChatGrpcClient::NotifyAddFriend(std::string server_ip, const AddFri
 	Status status = stub->NotifyAddFriend(&context, req, &rsp);
 	Defer defercon([&stub, this, &pool]() {
 		pool->ReturnConnection(std::move(stub));
-		});
+	});
 
 	if (!status.ok()) {
 		rsp.set_error(ErrorCodes::RPCFailed);

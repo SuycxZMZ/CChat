@@ -51,7 +51,7 @@ int main()
 		});
 
 		auto port_str = cfg["SelfServer"]["port"];
-		std::cout << "----------------" << "ChatServer1 start at port:"
+		std::cout << "----------------" << "ChatServer2 start at port:"
 			<< port_str << "----------------" << std::endl;
 		CServer s(io_context, atoi(port_str.c_str()));
 		io_context.run();

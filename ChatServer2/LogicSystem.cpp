@@ -87,8 +87,8 @@ void LogicSystem::RegisterCallBacks()
     _func_callbacks[ID_SEARCH_USER_REQ] = std::bind(&LogicSystem::SearchInfo, this,
         std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
 
-    //_func_callbacks[ID_ADD_FRIEND_REQ] = std::bind(&LogicSystem::AddFriendApply, this,
-    //    std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
+    _func_callbacks[ID_ADD_FRIEND_REQ] = std::bind(&LogicSystem::AddFriendApply, this,
+        std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
 
     //_func_callbacks[ID_AUTH_FRIEND_REQ] = std::bind(&LogicSystem::AuthFriendApply, this,
     //    std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
@@ -155,7 +155,7 @@ void LogicSystem::LoginHandler(std::shared_ptr<CSession> session, const short& m
 	rtvalue["sex"] = user_info->sex;
 	rtvalue["icon"] = user_info->icon;
 
-	/*std::vector<std::shared_ptr<ApplyInfo>> apply_list;
+	std::vector<std::shared_ptr<ApplyInfo>> apply_list;
 	auto b_apply = GetFriendApplyInfo(uid, apply_list);
 	if (b_apply) {
 		for (auto& apply : apply_list) {
@@ -171,19 +171,19 @@ void LogicSystem::LoginHandler(std::shared_ptr<CSession> session, const short& m
 		}
 	}
 
-	std::vector<std::shared_ptr<UserInfo>> friend_list;
-	bool b_friend_list = GetFriendList(uid, friend_list);
-	for (auto& friend_ele : friend_list) {
-		Json::Value obj;
-		obj["name"] = friend_ele->name;
-		obj["uid"] = friend_ele->uid;
-		obj["icon"] = friend_ele->icon;
-		obj["nick"] = friend_ele->nick;
-		obj["sex"] = friend_ele->sex;
-		obj["desc"] = friend_ele->desc;
-		obj["back"] = friend_ele->back;
-		rtvalue["friend_list"].append(obj);
-	}*/
+	//std::vector<std::shared_ptr<UserInfo>> friend_list;
+	//bool b_friend_list = GetFriendList(uid, friend_list);
+	//for (auto& friend_ele : friend_list) {
+	//	Json::Value obj;
+	//	obj["name"] = friend_ele->name;
+	//	obj["uid"] = friend_ele->uid;
+	//	obj["icon"] = friend_ele->icon;
+	//	obj["nick"] = friend_ele->nick;
+	//	obj["sex"] = friend_ele->sex;
+	//	obj["desc"] = friend_ele->desc;
+	//	obj["back"] = friend_ele->back;
+	//	rtvalue["friend_list"].append(obj);
+	//}
 
 	auto server_name = ConfigMgr::GetInstance()["SelfServer"]["name"];
 	auto rd_res = RedisMgr::GetInstance()->HGet(LOGIN_COUNT, server_name);
@@ -258,13 +258,14 @@ void LogicSystem::AddFriendApply(std::shared_ptr<CSession> session, const short&
 	auto applyname = root["applyname"].asString();
 	auto bakname = root["bakname"].asString();
 	auto touid = root["touid"].asInt();
-	std::cout << "user login uid is  " << uid << " applyname  is "
+	std::cout << "Add friend apply is  " << uid << " applyname  is "
 		<< applyname << " bakname is " << bakname << " touid is " << touid << std::endl;
 
 	Json::Value  rtvalue;
 	rtvalue["error"] = ErrorCodes::Success;
 	Defer defer([this, &rtvalue, session]() {
 		std::string return_str = rtvalue.toStyledString();
+		/*std::cout << "---------- ID_ADD_FRIEND_RSP:" << return_str << std::endl;*/
 		session->Send(return_str, ID_ADD_FRIEND_RSP);
 	});
 	MySqlMgr::GetInstance()->AddFriendApply(uid, touid);
@@ -284,6 +285,7 @@ void LogicSystem::AddFriendApply(std::shared_ptr<CSession> session, const short&
 	auto apply_info = std::make_shared<UserInfo>();
 	bool b_info = GetBaseInfo(base_key, uid, apply_info);
 
+	// 两个用户连接的是一个服务器
 	if (to_ip_value == self_name) {
 		auto session = UserMgr::GetInstance()->GetSession(touid);
 		if (session) {
@@ -298,6 +300,8 @@ void LogicSystem::AddFriendApply(std::shared_ptr<CSession> session, const short&
 				notify["nick"] = apply_info->nick;
 			}
 			std::string return_str = notify.toStyledString();
+			std::cout << "----------- ID_NOTIFY_ADD_FRIEND_REQ:" 
+				<< return_str << " -----------" << std::endl;
 			session->Send(return_str, ID_NOTIFY_ADD_FRIEND_REQ);
 		}
 
@@ -515,5 +519,10 @@ bool LogicSystem::GetBaseInfo(std::string base_key, int uid, std::shared_ptr<Use
 	}
 
 	return true;
+}
+
+bool LogicSystem::GetFriendApplyInfo(int to_uid, std::vector<std::shared_ptr<ApplyInfo>>& list)
+{
+	return MySqlMgr::GetInstance()->GetApplyList(to_uid, list, 0, 10);
 }
 

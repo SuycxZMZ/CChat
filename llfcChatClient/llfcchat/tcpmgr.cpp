@@ -296,7 +296,6 @@ void TcpMgr::initHandlers()
             qDebug() << "Add Friend Failed, err is " << err;
             return;
         }
-
          qDebug() << "Add Friend Success " ;
       });
 

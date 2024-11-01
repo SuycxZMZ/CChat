@@ -150,7 +150,9 @@ void CSession::HandleWrite(const boost::system::error_code& error,
     try {
         if (!error) {
             std::unique_lock<std::mutex> lock(_send_mutex);
-            std::cout << "----------- message: " << std::string(_send_que.front()->_data, _send_que.front()->_total_len) << "send finish" << std::endl;
+            std::cout << "----------- send message finish: " 
+                << std::string(_send_que.front()->_data, _send_que.front()->_total_len) 
+                << "send finish" << std::endl;
             _send_que.pop();
             if (!_send_que.empty()) {
                 auto msg_node = _send_que.front();

@@ -38,7 +38,7 @@ private:
     void GetUserByUid(std::string uid_str, Json::Value& rtvalue);
     void GetUserByName(std::string name, Json::Value& rtvalue);
     bool GetBaseInfo(std::string base_key, int uid, std::shared_ptr<UserInfo>& userinfo);
-    //bool GetFriendApplyInfo(int to_uid, std::vector<std::shared_ptr<ApplyInfo>>& list);
+    bool GetFriendApplyInfo(int to_uid, std::vector<std::shared_ptr<ApplyInfo>>& list);
     //bool GetFriendList(int self_id, std::vector<std::shared_ptr<UserInfo>>& user_list);
 
 private:
