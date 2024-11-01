@@ -81,7 +81,7 @@ AddFriendRsp ChatGrpcClient::NotifyAddFriend(std::string server_ip, const AddFri
 		rsp.set_error(ErrorCodes::Success);
 		rsp.set_applyuid(req.applyuid());
 		rsp.set_touid(req.touid());
-		});
+	});
 
 	auto find_iter = _pools.find(server_ip);
 	if (find_iter == _pools.end()) {
@@ -94,7 +94,7 @@ AddFriendRsp ChatGrpcClient::NotifyAddFriend(std::string server_ip, const AddFri
 	Status status = stub->NotifyAddFriend(&context, req, &rsp);
 	Defer defercon([&stub, this, &pool]() {
 		pool->ReturnConnection(std::move(stub));
-		});
+	});
 
 	if (!status.ok()) {
 		rsp.set_error(ErrorCodes::RPCFailed);
@@ -191,11 +191,10 @@ AuthFriendRsp ChatGrpcClient::NotifyAuthFriend(std::string server_ip, const Auth
 }
 
 TextChatMsgRsp ChatGrpcClient::NotifyTextChatMsg(std::string server_ip,
-	const TextChatMsgReq& req, const Json::Value& rtvalue) {
-
+	const TextChatMsgReq& req, const Json::Value& rtvalue) 
+{
 	TextChatMsgRsp rsp;
 	rsp.set_error(ErrorCodes::Success);
-
 	Defer defer([&rsp, &req]() {
 		rsp.set_fromuid(req.fromuid());
 		rsp.set_touid(req.touid());

@@ -19,7 +19,9 @@ public:
 	std::shared_ptr<UserInfo> GetUser(std::string name);
 	bool AddFriendApply(const int& from, const int& to);
 	bool GetApplyList(int touid, std::vector<std::shared_ptr<ApplyInfo>>& applyList, int begin, int limit = 10);
-	//bool TestProcedure(const std::string& email, int& uid, std::string& name);
+	bool AuthFriendApply(const int& from, const int& to);
+	bool AddFriend(const int& from, const int& to, std::string back_name);
+	bool GetFriendList(int self_id, std::vector<std::shared_ptr<UserInfo> >& user_info);
 private:
 	MySqlMgr();
 

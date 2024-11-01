@@ -191,11 +191,10 @@ AuthFriendRsp ChatGrpcClient::NotifyAuthFriend(std::string server_ip, const Auth
 }
 
 TextChatMsgRsp ChatGrpcClient::NotifyTextChatMsg(std::string server_ip,
-	const TextChatMsgReq& req, const Json::Value& rtvalue) {
-
+	const TextChatMsgReq& req, const Json::Value& rtvalue) 
+{
 	TextChatMsgRsp rsp;
 	rsp.set_error(ErrorCodes::Success);
-
 	Defer defer([&rsp, &req]() {
 		rsp.set_fromuid(req.fromuid());
 		rsp.set_touid(req.touid());
