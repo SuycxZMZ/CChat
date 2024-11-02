@@ -1,5 +1,6 @@
 ﻿#pragma once
-#include "const.h"
+
+#include "HttpConnection.h"
 #include "Singleton.h"
 
 class HttpConnection;

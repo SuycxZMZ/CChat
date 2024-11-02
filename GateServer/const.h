@@ -6,27 +6,13 @@
 #include <boost/filesystem.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/ini_parser.hpp>
-
 #include <json/json.h>
-
-#include <memory>
-#include <chrono>
-#include <iostream>
 #include <string>
-#include <map>
-#include <unordered_map>
-#include <queue>
 #include <cassert>
-#include <condition_variable>
-#include <mutex>
 
-#include <hiredis.h>
 
 #define CODEPREFIX "code_"
 
-namespace beast = boost::beast;
-namespace http = beast::http;
-namespace net = boost::asio;
 using tcp = boost::asio::ip::tcp;
 
 // ------------------ url转换代码 ------------------ //

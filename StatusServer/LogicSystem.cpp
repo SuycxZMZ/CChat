@@ -1,8 +1,7 @@
 ﻿#include "LogicSystem.h"
 #include "HttpConnection.h"
-#include "const.h"
-#include "RedisMgr.h"
-#include "MySqlMgr.h"
+
+using namespace boost;
 
 LogicSystem::LogicSystem() {
 	RegGet("/get_test", [](std::shared_ptr<HttpConnection> connection) {

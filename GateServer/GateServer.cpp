@@ -1,7 +1,6 @@
-﻿#include "const.h"
-#include "CServer.h"
+﻿#include "CServer.h"
 #include "ConfigMgr.h"
-#include "RedisMgr.h"
+#include <iostream>
 
 int main()
 {
@@ -14,7 +13,7 @@ int main()
 
     try {
         unsigned short port = gate_port;
-        net::io_context ioc{ 1 };
+        boost::asio::io_context ioc{ 1 };
         boost::asio::signal_set signals(ioc, SIGINT, SIGTERM);
         signals.async_wait([&ioc](const boost::system::error_code& error, int signal_number) {
             if (error) {

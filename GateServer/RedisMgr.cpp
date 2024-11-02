@@ -1,6 +1,7 @@
 ﻿#include "RedisMgr.h"
 #include "const.h"
 #include "ConfigMgr.h"
+
 RedisMgr::RedisMgr() : _con_pool(nullptr) {
 	auto config_mgr = ConfigMgr::GetInstance();
 	auto host = config_mgr["Redis"]["host"];
