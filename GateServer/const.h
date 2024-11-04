@@ -10,7 +10,6 @@
 #include <string>
 #include <cassert>
 
-
 #define CODEPREFIX "code_"
 
 using tcp = boost::asio::ip::tcp;
@@ -47,4 +46,5 @@ private:
 	std::function<void()> _func;
 };
 
+enum class LogDestination { Console, File };
 
