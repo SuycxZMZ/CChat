@@ -141,7 +141,8 @@ LogicSystem::LogicSystem() {
 
     int uid = MySqlMgr::GetInstance()->RegUser(name, email, pwd);
     if (uid == 0 || uid == -1) {
-      std::cout << " user or email exist" << std::endl;
+      std::cout << " user or email exist:"
+                << uid << std::endl;
       root["error"] = ErrorCodes::UserExist;
       std::string jsonstr = root.toStyledString();
       beast::ostream(connection->_response.body()) << jsonstr;

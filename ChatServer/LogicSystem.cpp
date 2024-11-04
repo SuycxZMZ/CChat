@@ -274,14 +274,17 @@ void LogicSystem::AddFriendApply(std::shared_ptr<CSession> session,
   rtvalue["error"] = ErrorCodes::Success;
   Defer defer([this, &rtvalue, session]() {
     std::string return_str = rtvalue.toStyledString();
-    /*std::cout << "---------- ID_ADD_FRIEND_RSP:" << return_str << std::endl;*/
     session->Send(return_str, ID_ADD_FRIEND_RSP);
   });
+
+  // 这里直接添加到mysql就行，因为添加好友之前肯定已经正确搜索到了
   MySqlMgr::GetInstance()->AddFriendApply(uid, touid);
 
   auto to_str = std::to_string(touid);
   auto to_ip_key = USERIPPREFIX + to_str;
   std::string to_ip_value = "";
+
+  // 获取目标用户所在的服务器，放入 to_ip_value
   bool b_ip = RedisMgr::GetInstance()->Get(to_ip_key, to_ip_value);
   if (!b_ip) {
     return;
@@ -309,14 +312,15 @@ void LogicSystem::AddFriendApply(std::shared_ptr<CSession> session,
         notify["nick"] = apply_info->nick;
       }
       std::string return_str = notify.toStyledString();
-      std::cout << "----------- ID_NOTIFY_ADD_FRIEND_REQ:" << return_str
-                << " -----------" << std::endl;
+      // std::cout << "----------- ID_NOTIFY_ADD_FRIEND_REQ:" << return_str
+      //           << " -----------" << std::endl;
       session->Send(return_str, ID_NOTIFY_ADD_FRIEND_REQ);
     }
 
     return;
   }
 
+  // 不在同一个服务器，调用rpc远程方法
   message::AddFriendReq add_req;
   add_req.set_applyuid(uid);
   add_req.set_touid(touid);
