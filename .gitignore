@@ -62,8 +62,9 @@ ChatServer2/x64
 
 build
 lib
+bin
 .idea
-.cache
+.cache/
 cmake-build-debug
 cmake-build-release
 llfcChatClient/build*/
