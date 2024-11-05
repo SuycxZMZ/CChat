@@ -225,10 +225,6 @@ void LogicSystem::SearchInfo(std::shared_ptr<CSession> session,
     return;
   }
 
-  // Json::Reader reader;
-  // Json::Value root;
-  // reader.parse(msg_data, root);
-
   auto uid_str = root["uid"].asString();
   std::cout << "user SearchInfo uid is  " << uid_str << std::endl;
 
@@ -510,10 +506,6 @@ void LogicSystem::GetUserByName(std::string name, Json::Value &rtvalue) {
   std::string info_str = "";
   bool b_base = RedisMgr::GetInstance()->Get(base_key, info_str);
   if (b_base) {
-    // Json::Reader reader;
-    // Json::Value root;
-    // reader.parse(info_str, root);
-
     Json::Value root;
     Json::CharReaderBuilder readerBuilder;
     std::string errs;
