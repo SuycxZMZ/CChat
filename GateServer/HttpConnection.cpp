@@ -37,7 +37,7 @@ void HttpConnection::CheckDeadline() {
                   << std::endl;
       }
     } else {
-      std::cout << "http timeout" << std::endl;
+      std::cout << "http timeout check and close" << std::endl;
     }
   });
 }
